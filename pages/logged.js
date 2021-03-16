@@ -1,32 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
 import api from '../config/api';
 import { isAuthenticated } from '../services/auth';
+import { ContainerBackground } from '../components/ContainerBackground';
+import { ContainerContent } from '../components/ContainerContent';
+import { ContainerLine } from '../components/ContainerLine';
 import Menu from '../components/Menu';
+
+
+const ContainerWindow = styled.div`
+    width: 60%;
+    min-height: 80vh;
+    margin-top: 30px;
+    padding: 10px;
+
+    background: #fff;
+
+    h2 {
+        text-align: center;
+        margin: 5px;
+    }
+`;
 
 function Logged() {
     const route = useRouter();
-    const [authetication, setAuthetication] = useState(false);
-    const [data, setData] = useState('');
+    const [requisitions, setRequisitions] = useState();
+    const [error, setError] = useState();
 
     useEffect(() => {
         const verifyAuthentication = isAuthenticated();
-        setAuthetication(verifyAuthentication);
 
         if (!verifyAuthentication) {
             route.push('/');
+            return;
         }
 
         async function handleInformation() {
             try {
-                const response = await api.get('/admin', {
+                const response = await api.get('/requisition/allrequisitions', {
                     headers: {
                         'authorization-token': localStorage.getItem("@Sistem_mar21:token"),
                     }
                 });
-                setData(response.data);
+                setRequisitions(response.data);
             } catch (error) {
-                console.log(error);
+                setError(error.response.data);
             }
         }
         handleInformation();
@@ -34,14 +53,24 @@ function Logged() {
 
 
     return (
-        <>
+        <ContainerBackground>
             <Menu />
-            {authetication && (
-                <div>
-                    {data}
-                </div>
-            )}
-        </>
+            <ContainerContent contentWindow>
+                <ContainerWindow>
+                    <h2>Processos</h2>
+                    {requisitions && requisitions.map(requisition => (
+                        <ContainerLine>
+                            <div/>
+                            <span>{`${requisition.number}/${requisition.section}`}</span>
+                            <span>{requisition.type}</span>
+                            <span>{`R$ ${requisition.value}`}</span>
+                            <strong>{requisition.status}</strong>
+                            <a href="">Detalhar</a>
+                        </ContainerLine>
+                    ))}
+                </ContainerWindow>
+            </ContainerContent>
+        </ContainerBackground>
     )
 }
 
