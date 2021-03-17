@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="" />
+  <img src="https://github.com/EricEOL/administrex/blob/main/public/logo-whole.png" />
 </p>
 
 ## Administrex
@@ -34,8 +34,8 @@ Aqui estão as tecnologias utilizadas no Back-end desse projeto.
 
   - [x] Cadastramento de processos
   - [x] Mapeamento das situações
-  - [] Atualização da situação dos processos por parte das seções envolvidas
-  - [] Total dos valores gastos no anualmente
+  - [ ] Atualização da situação dos processos por parte das seções envolvidas
+  - [ ] Total dos valores gastos no anualmente
 
 
 ## Links
