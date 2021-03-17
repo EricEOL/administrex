@@ -98,7 +98,7 @@ function Login() {
       localStorage.setItem('@Sistem_mar21:token', token);
       localStorage.setItem('@Sistem_mar21:user', user);
 
-      route.push('/logged');
+      route.push('/process');
 
     } catch (error) {
       setError(error.response.data);
@@ -107,7 +107,7 @@ function Login() {
 
   return (
     <ContainerBackground>
-      <ContainerContent>
+      <ContainerContent login>
 
         <Logo />
 

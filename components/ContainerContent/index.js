@@ -2,11 +2,15 @@ import styled, {css} from 'styled-components';
 
 export const ContainerContent = styled.div`
     display: flex;
-    align-items: center;
-    justify-content: center;
-    justify-content: ${props => props.contentWindow && css`flex-start`};
-    flex-direction: column;
 
-    min-height: 100vh;
+    flex-direction: row;
+    flex-direction: ${props => props.login && css`column`};
+    
+    align-items: center;
+    
+    justify-content: space-evenly;
+    justify-content: ${props => props.login && css`center`};
+
     width: 100%;
+    height: ${props => props.login && css`100vh`};
 `;
