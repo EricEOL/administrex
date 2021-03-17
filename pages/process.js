@@ -1,30 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import styled from 'styled-components';
 import api from '../config/api';
 import { isAuthenticated } from '../services/auth';
+import formatNumber from '../utils/formatNumber';
 import { ContainerBackground } from '../components/ContainerBackground';
 import { ContainerContent } from '../components/ContainerContent';
 import { ContainerLine } from '../components/ContainerLine';
 import Menu from '../components/Menu';
 import AsideMenu from '../components/AsideMenu';
+import { ContainerWindow } from '../components/ContainerWindow';
 
-
-const ContainerWindow = styled.div`
-    width: 70%;
-    min-height: 80vh;
-    margin-top: 30px;
-    padding: 10px;
-
-    background: #fff;
-
-    h2 {
-        text-align: center;
-        margin: 5px;
-    }
-`;
-
-function Logged() {
+function Process() {
     const route = useRouter();
     const [requisitions, setRequisitions] = useState();
     const [error, setError] = useState();
@@ -37,7 +23,7 @@ function Logged() {
             return;
         }
 
-        async function handleInformation() {
+        async function getData() {
             try {
                 const response = await api.get('/requisition/allrequisitions', {
                     headers: {
@@ -49,7 +35,7 @@ function Logged() {
                 setError(error.response.data);
             }
         }
-        handleInformation();
+        getData();
     });
 
 
@@ -58,16 +44,16 @@ function Logged() {
             <Menu />
             <ContainerContent contentWindow>
                 <ContainerWindow>
-                    <h2>Processos</h2>  
+                    <h2>Processos</h2>
                     {requisitions && requisitions.map(requisition => {
                         {
                             if (requisition.status === 'Aguardando') {
                                 return (
-                                    <ContainerLine waiting>
+                                    <ContainerLine waiting key={`${requisition.number}/${requisition.section}`}>
                                         <div />
                                         <span>{`${requisition.number}/${requisition.section}`}</span>
                                         <span>{requisition.type}</span>
-                                        <span>{`R$ ${requisition.value}`}</span>
+                                        <span>{`${formatNumber(requisition.value)}`}</span>
                                         <strong>{requisition.status}</strong>
                                         <a href="">Detalhar</a>
                                     </ContainerLine>
@@ -77,11 +63,11 @@ function Logged() {
                         {
                             if (requisition.status === 'Empenhado') {
                                 return (
-                                    <ContainerLine empenhado>
+                                    <ContainerLine empenhado key={`${requisition.number}/${requisition.section}`}>
                                         <div />
                                         <span>{`${requisition.number}/${requisition.section}`}</span>
                                         <span>{requisition.type}</span>
-                                        <span>{`R$ ${requisition.value}`}</span>
+                                        <span>{`${formatNumber(requisition.value)}`}</span>
                                         <strong>{requisition.status}</strong>
                                         <a href="">Detalhar</a>
                                     </ContainerLine>
@@ -91,11 +77,11 @@ function Logged() {
                         {
                             if (requisition.status === 'Liquidado') {
                                 return (
-                                    <ContainerLine liquidado>
+                                    <ContainerLine liquidado key={`${requisition.number}/${requisition.section}`}>
                                         <div />
                                         <span>{`${requisition.number}/${requisition.section}`}</span>
                                         <span>{requisition.type}</span>
-                                        <span>{`R$ ${requisition.value}`}</span>
+                                        <span>{`${formatNumber(requisition.value)}`}</span>
                                         <strong>{requisition.status}</strong>
                                         <a href="">Detalhar</a>
                                     </ContainerLine>
@@ -104,12 +90,12 @@ function Logged() {
                         }
                     })}
                 </ContainerWindow>
-                
+
                 <AsideMenu />
-            
+
             </ContainerContent>
         </ContainerBackground>
     )
 }
 
-export default Logged;
+export default Process;

@@ -6,8 +6,8 @@ export const ContainerContent = styled.div`
     flex-direction: row;
     flex-direction: ${props => props.login && css`column`};
     
-    align-items: center;
-    
+    align-items: ${props => props.login && css`center`};
+        
     justify-content: space-evenly;
     justify-content: ${props => props.login && css`center`};
 

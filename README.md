@@ -24,7 +24,7 @@ Aqui estão as tecnologias utilizadas no Back-end desse projeto.
 
 ## Serviços utilizados
  
-* Não foi realizado deploy. O projeto foi criado para funcionar internamente na unidade.
+* Não foi realizado deploy. O projeto foi criado para funcionar localmente na unidade, por meio da intranet.
 
 ## Screenshots
 

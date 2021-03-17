@@ -22,8 +22,8 @@ const Container = styled.aside`
 export default function AsideMenu() {
     return (
         <Container>
-            <a href=""><img src="/add-doc.svg" alt="Inserir nova requisição"/></a>
-            <a href=""><img src="/received-doc.svg" alt="Receber documento"/></a>
+            <a href="/requisitions/register"><img src="/add-doc.svg" alt="Inserir nova requisição"/></a>
+            <a href="/requisitions/receive"><img src="/received-doc.svg" alt="Receber documento"/></a>
         </Container>
     )
 }

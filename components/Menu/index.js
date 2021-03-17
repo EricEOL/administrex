@@ -50,6 +50,7 @@ export default function Menu() {
         <ContainerMenu>
             <Logo />
             <ul>
+                <li><a href="/process">Início</a></li>
                 <li><a href="">Perfil</a></li>
                 <li><button onClick={handleLogout}>Log Out</button></li>
             </ul>
