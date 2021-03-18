@@ -60,14 +60,14 @@ function Process() {
                         {
                             if (requisition.status === 'Aguardando') {
                                 return (
-                                    <ContainerLine waiting key={requisition._id}>
+                                    <ContainerLine waiting key={requisition._id} id={requisition._id}>
                                         <div />
                                         <span>{`${requisition.number}/${requisition.section}`}</span>
                                         <span>{requisition.type}</span>
                                         <span>{`${formatNumber(requisition.value)}`}</span>
                                         <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
-                                        <a href="">Detalhar</a>
+                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
                                     </ContainerLine>
                                 )
                             }
@@ -82,7 +82,7 @@ function Process() {
                                         <span>{`${formatNumber(requisition.value)}`}</span>
                                         <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
-                                        <a href="">Detalhar</a>
+                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
                                     </ContainerLine>
                                 )
                             }
@@ -97,7 +97,7 @@ function Process() {
                                         <span>{`${formatNumber(requisition.value)}`}</span>
                                         <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
-                                        <a href="">Detalhar</a>
+                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
                                     </ContainerLine>
                                 )
                             }
@@ -112,7 +112,7 @@ function Process() {
                                         <span>{`${formatNumber(requisition.value)}`}</span>
                                         <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
-                                        <a href="">Detalhar</a>
+                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
                                     </ContainerLine>
                                 )
                             }

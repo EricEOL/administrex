@@ -20,6 +20,11 @@ const ContainerMenu = styled.nav`
                 font-size: 15px;
                 text-decoration: none;
                 color: #fff;
+                transition: 0.2s;
+
+                &:hover {
+                    color: yellow;
+                }
             }
             button {
                 font-size: 15px;
