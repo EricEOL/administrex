@@ -28,8 +28,36 @@ Aqui estão as tecnologias utilizadas no Back-end desse projeto.
 
 ## Screenshots
 
-* Estou preparando...
- 
+### 1 - Login
+
+| Desktop  |
+|---|
+| ![Login_screen_de](https://github.com/EricEOL/administrex/blob/main/public/screenshots/login_de.jpg)  |
+
+### 2 - Processos (Resumo)
+
+| Desktop  |
+|---|
+| ![Process_screen_de](https://github.com/EricEOL/administrex/blob/main/public/screenshots/process_de.jpg)  |
+
+### 3 - Processo detalhado
+
+| Desktop  |
+|---|
+| ![Details_screen_de](https://github.com/EricEOL/administrex/blob/main/public/screenshots/details_de.jpg)  |
+
+### 4 - Registro de nova requisição
+
+| Desktop  |
+|---|
+| ![Register_screen_de](https://github.com/EricEOL/administrex/blob/main/public/screenshots/register_req_de.jpg)  |
+
+### 5 - Recebimento de processo
+
+| Desktop  |
+|---|
+| ![Receive_screen_de](https://github.com/EricEOL/administrex/blob/main/public/screenshots/receive_de.jpg)  |
+
 ## Features
 
   - [x] Cadastramento de processos
