@@ -18,6 +18,7 @@ export const ContainerLine = styled.div`
         background: ${props => props.waiting && css`yellow`};
         background: ${props => props.empenhado && css`green`};
         background: ${props => props.liquidado && css`blue`};
+        background: ${props => props.pago && css`gray`};
     }
 
     span {
@@ -31,9 +32,11 @@ export const ContainerLine = styled.div`
         background: ${props => props.waiting && css`yellow`};
         background: ${props => props.empenhado && css`green`};
         background: ${props => props.liquidado && css`blue`};
+        background: ${props => props.pago && css`gray`};
         color: #000;
         color: ${props => props.empenhado && css`#fff`};
         color: ${props => props.liquidado && css`#fff`};
+        color: ${props => props.pago && css`#fff`};
         padding: 5px;
         width: 80px;
         text-align: center;

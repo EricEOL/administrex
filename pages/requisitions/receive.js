@@ -22,10 +22,12 @@ const ContainerReceive = styled.div`
     }
 
     > form {
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        padding-bottom: 20px;
 
         strong {
             text-align: center;
@@ -60,7 +62,25 @@ const ContainerReceive = styled.div`
             background: #064C74;
         }
     }
+
+    .notice-error {
+        position: absolute;
+        font-size: 12px;
+        color: red;
+        font-weight: 700;
     }
+
+    .notice-ok {
+        position: absolute;
+        bottom: 0;
+        font-size: 12px;
+        color: green;
+        font-weight: 700;
+    }
+
+    }
+
+
 
 `;
 
@@ -70,6 +90,8 @@ export default function Receive() {
     const [requisitions, setRequisitions] = useState();
     const [requisitionUpdated, setRequisitionUpdated] = useState();
     const [sendingImage, setSendingImage] = useState(false);
+    const [noticeSending, setNoticeSending] = useState();
+    const [error, setError] = useState();
 
     useEffect(() => {
         const verifyAuthentication = isAuthenticated();
@@ -96,17 +118,25 @@ export default function Receive() {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        console.log(requisitionUpdated);
-        
-        setSendingImage(true);
 
-        /*         const response = await api.put('/requisition/updatelocale', {}, {
-                    headers: {
-                        'authorization-token': localStorage.getItem("@Sistem_mar21:token"),
-                    }
-                }) */
+        try {
+            const response = await api.put('/requisition/updatelocale', { id: requisitionUpdated }, {
+                headers: {
+                    'authorization-token': localStorage.getItem("@Sistem_mar21:token"),
+                }
+            });
+
+            setNoticeSending(response.data);
+
+            const indexRequisition = requisitions.findIndex(requisition => requisition._id === requisitionUpdated);
+            requisitions.splice(indexRequisition, 1);
+
+            setSendingImage(true);
+
+        } catch (error) {
+            setError(error.response.data);
+        }
     }
-
     return (
         <ContainerBackground>
             <Menu />
@@ -120,15 +150,26 @@ export default function Receive() {
                             <select name="" id="" onChange={(event) => {
                                 setRequisitionUpdated(event.target.value);
                                 setSendingImage(false);
+                                setNoticeSending('');
+                                setError('');
                             }}>
                                 <option value=""></option>
-                                {requisitions && requisitions.map(requisition => (
-                                    <option value={requisition._id} key={requisition._id}>
+                                {requisitions && requisitions.map((requisition, index) => (
+                                    <option value={requisition._id} key={index} id={index}>
                                         {`${requisition.number}/${requisition.section}`}
                                     </option>
                                 ))}
+                                {!requisitions && (
+                                    <option value="">Não há</option>
+                                )}
                             </select>
                             <button type="submit">Receber</button>
+                            {error && (
+                                <p className="notice-error">{error}</p>
+                            )}
+                            {noticeSending && (
+                                <p className="notice-ok">{noticeSending}</p>
+                            )}
                         </form>
                     </ContainerReceive>
                 </ContainerWindow>

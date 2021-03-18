@@ -45,15 +45,27 @@ function Process() {
             <ContainerContent contentWindow>
                 <ContainerWindow>
                     <h2>Processos</h2>
+                    
+                    <ContainerLine style={{fontWeight: 'bold'}}>
+                        <div style={{background: 'transparent'}}/>
+                        <span>Nº/Seção</span>
+                        <span>Tipo</span>
+                        <span>Valor</span>
+                        <span>Local</span>
+                        <strong style={{fontSize: '14px'}}>Situação</strong>
+                        <a href="" style={{color: '#000', fontSize: '14px', cursor: 'auto'}}>Detalhar</a>
+                    </ContainerLine>
+
                     {requisitions && requisitions.map(requisition => {
                         {
                             if (requisition.status === 'Aguardando') {
                                 return (
-                                    <ContainerLine waiting key={`${requisition.number}/${requisition.section}`}>
+                                    <ContainerLine waiting key={requisition._id}>
                                         <div />
                                         <span>{`${requisition.number}/${requisition.section}`}</span>
                                         <span>{requisition.type}</span>
                                         <span>{`${formatNumber(requisition.value)}`}</span>
+                                        <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
                                         <a href="">Detalhar</a>
                                     </ContainerLine>
@@ -68,6 +80,7 @@ function Process() {
                                         <span>{`${requisition.number}/${requisition.section}`}</span>
                                         <span>{requisition.type}</span>
                                         <span>{`${formatNumber(requisition.value)}`}</span>
+                                        <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
                                         <a href="">Detalhar</a>
                                     </ContainerLine>
@@ -82,6 +95,22 @@ function Process() {
                                         <span>{`${requisition.number}/${requisition.section}`}</span>
                                         <span>{requisition.type}</span>
                                         <span>{`${formatNumber(requisition.value)}`}</span>
+                                        <span>{requisition.locale}</span>
+                                        <strong>{requisition.status}</strong>
+                                        <a href="">Detalhar</a>
+                                    </ContainerLine>
+                                )
+                            }
+                        }
+                        {
+                            if (requisition.status === 'Pago') {
+                                return (
+                                    <ContainerLine pago key={`${requisition.number}/${requisition.section}`}>
+                                        <div />
+                                        <span>{`${requisition.number}/${requisition.section}`}</span>
+                                        <span>{requisition.type}</span>
+                                        <span>{`${formatNumber(requisition.value)}`}</span>
+                                        <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
                                         <a href="">Detalhar</a>
                                     </ContainerLine>
