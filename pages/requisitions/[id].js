@@ -19,7 +19,7 @@ const Informations = styled.div`
     .column-1, .column-2 {
         
         div {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
 
             strong {
                 display: block;
@@ -88,6 +88,7 @@ export default function Details({ id }) {
                         <h2>Detalhes do Processo - 001/Almox</h2>
                     </div>
                     {process && process.map(item => (
+                        <>
                         <Informations key={item._id}>
                             <div className="column-1">
                                 <div>
@@ -110,6 +111,10 @@ export default function Details({ id }) {
                                     <strong>Tipo</strong>
                                     <span>{item.type}</span>
                                 </div>
+                                <div>
+                                    <strong>ND</strong>
+                                    <span>{item.nd}</span>
+                                </div>
                             </div>
                             <div className="column-2">
                                 <div>
@@ -121,16 +126,20 @@ export default function Details({ id }) {
                                     <span>{item.noempenho}</span>
                                 </div>
                                 <div>
-                                    <strong>Nº Liquidação</strong>
+                                    <strong>Liquidação</strong>
                                     <span>{item.noliquid}</span>
                                 </div>
                                 <div>
-                                    <strong>Nº Pagamento</strong>
+                                    <strong>Pagamento</strong>
                                     <span>{item.nopayment}</span>
                                 </div>
                                 <div>
                                     <strong>Local Atual</strong>
                                     <span>{item.locale}</span>
+                                </div>
+                                <div>
+                                    <strong>Entregue no Sup doc</strong>
+                                    <span>{item.supdoc}</span>
                                 </div>
                             </div>
                             {item.status === 'Aguardando' && (
@@ -170,8 +179,13 @@ export default function Details({ id }) {
                                 </Status>
                             )}
                         </Informations>
-                    ))}
 
+                    <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
+                        <a className="ancor-button" href={`/requisitions/empenho/${item._id}`}>Inserir Empenho</a>
+                        <a className="ancor-button" href={`/requisitions/payment/${item._id}`}>Inserir Liquidação/Pagamento</a>
+                    </div>
+                    </>
+                    ))}
                 </ContainerWindow>
             </ContainerContent>
         </ContainerBackground >

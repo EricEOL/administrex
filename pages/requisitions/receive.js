@@ -46,17 +46,17 @@ const ContainerReceive = styled.div`
         }
 
         button {
-        width: 270px;
-        height: 30px;
-        border: 0;
-        border-radius: 4px;
-        background: #0B8BD5;
-        color: #fff;
-        cursor: pointer;
-        font-weight: 700;
-        outline: none;
-        margin-top: 30px;
-        transition: 0.2s;
+            width: 270px;
+            height: 30px;
+            border: 0;
+            border-radius: 4px;
+            background: #0B8BD5;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 700;
+            outline: none;
+            margin-top: 30px;
+            transition: 0.2s;
 
         &:hover {
             background: #064C74;
@@ -79,9 +79,6 @@ const ContainerReceive = styled.div`
     }
 
     }
-
-
-
 `;
 
 export default function Receive() {
