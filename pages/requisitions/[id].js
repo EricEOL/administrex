@@ -181,8 +181,8 @@ export default function Details({ id }) {
                         </Informations>
 
                     <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-                        <a className="ancor-button" href={`/requisitions/empenho/${item._id}`}>Inserir Empenho</a>
-                        <a className="ancor-button" href={`/requisitions/payment/${item._id}`}>Inserir Liquidação/Pagamento</a>
+                        <a className="ancor-button" href={`/requisitions/empenho/${item._id}__${item.number}-${item.section}`}>Inserir Empenho</a>
+                        <a className="ancor-button" href={`/requisitions/payment/${item._id}__${item.number}-${item.section}`}>Inserir Liquidação/Pagamento</a>
                     </div>
                     </>
                     ))}
