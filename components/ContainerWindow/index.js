@@ -14,6 +14,18 @@ export const ContainerWindow = styled.div`
         margin: 5px;
     }
 
+    >input {
+        width: 250px;
+        height: 30px;
+        outline: none;
+        border: 3px solid #DDE1E4;
+        margin-bottom: 10px;
+
+        &:focus {
+            border: 3px solid #0B8BD5;
+        }
+    }
+
     .ancor-button {
             width: 270px;
             height: 30px;

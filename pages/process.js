@@ -14,6 +14,7 @@ function Process() {
     const route = useRouter();
     const [requisitions, setRequisitions] = useState();
     const [error, setError] = useState();
+    const [requisitionsFiltered, setRequisitionsFiltered] = useState([]);
 
     useEffect(() => {
         const verifyAuthentication = isAuthenticated();
@@ -36,8 +37,23 @@ function Process() {
             }
         }
         getData();
-    });
+    }, []);
 
+    function handleFilter(event) {
+        const textFilter = event;
+        const textFilterModified = textFilter.toUpperCase();
+
+        const requisitionFiltered = requisitions.filter(requisition=> {
+            const concatData = `${requisition.number}/${requisition.section}/${requisition.status}/${requisition.type}/${requisition.locale}`;
+            const concatDataModified = concatData.toUpperCase();
+
+            if(concatDataModified.indexOf(textFilterModified) >= 0){
+                return requisition;
+            }            
+        });
+
+        setRequisitionsFiltered(requisitionFiltered);
+    }
 
     return (
         <ContainerBackground>
@@ -46,6 +62,13 @@ function Process() {
                 <ContainerWindow>
                     <h2>Processos</h2>
                     
+                    <input 
+                        type="text" 
+                        name="filter" 
+                        onChange={(event)=>handleFilter(event.target.value)}
+                        placeholder="Digite aqui e encontre seu processo"
+                    />
+
                     <ContainerLine style={{fontWeight: 'bold'}}>
                         <div style={{background: 'transparent'}}/>
                         <span>Nº/Seção</span>
@@ -56,7 +79,9 @@ function Process() {
                         <a href="" style={{color: '#000', fontSize: '14px', cursor: 'auto'}}>Detalhar</a>
                     </ContainerLine>
 
-                    {requisitions && requisitions.map(requisition => {
+                    {requisitionsFiltered.length > 0 ? (
+                        <>
+                            { requisitionsFiltered && requisitionsFiltered.map(requisition => {
                         {
                             if (requisition.status === 'Aguardando') {
                                 return (
@@ -118,6 +143,136 @@ function Process() {
                             }
                         }
                     })}
+                        </>
+                    ): (
+                        <>
+                        { requisitions && requisitions.map(requisition => {
+                        {
+                            if (requisition.status === 'Aguardando') {
+                                return (
+                                    <ContainerLine waiting key={requisition._id} id={requisition._id}>
+                                        <div />
+                                        <span>{`${requisition.number}/${requisition.section}`}</span>
+                                        <span>{requisition.type}</span>
+                                        <span>{`${formatNumber(requisition.value)}`}</span>
+                                        <span>{requisition.locale}</span>
+                                        <strong>{requisition.status}</strong>
+                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                    </ContainerLine>
+                                )
+                            }
+                        }
+                        {
+                            if (requisition.status === 'Empenhado') {
+                                return (
+                                    <ContainerLine empenhado key={`${requisition.number}/${requisition.section}`}>
+                                        <div />
+                                        <span>{`${requisition.number}/${requisition.section}`}</span>
+                                        <span>{requisition.type}</span>
+                                        <span>{`${formatNumber(requisition.value)}`}</span>
+                                        <span>{requisition.locale}</span>
+                                        <strong>{requisition.status}</strong>
+                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                    </ContainerLine>
+                                )
+                            }
+                        }
+                        {
+                            if (requisition.status === 'Liquidado') {
+                                return (
+                                    <ContainerLine liquidado key={`${requisition.number}/${requisition.section}`}>
+                                        <div />
+                                        <span>{`${requisition.number}/${requisition.section}`}</span>
+                                        <span>{requisition.type}</span>
+                                        <span>{`${formatNumber(requisition.value)}`}</span>
+                                        <span>{requisition.locale}</span>
+                                        <strong>{requisition.status}</strong>
+                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                    </ContainerLine>
+                                )
+                            }
+                        }
+                        {
+                            if (requisition.status === 'Pago') {
+                                return (
+                                    <ContainerLine pago key={`${requisition.number}/${requisition.section}`}>
+                                        <div />
+                                        <span>{`${requisition.number}/${requisition.section}`}</span>
+                                        <span>{requisition.type}</span>
+                                        <span>{`${formatNumber(requisition.value)}`}</span>
+                                        <span>{requisition.locale}</span>
+                                        <strong>{requisition.status}</strong>
+                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                    </ContainerLine>
+                                )
+                            }
+                        }
+                    })}
+                        </>
+                    )}
+
+                    {/* {requisitions && requisitions.map(requisition => {
+                        {
+                            if (requisition.status === 'Aguardando') {
+                                return (
+                                    <ContainerLine waiting key={requisition._id} id={requisition._id}>
+                                        <div />
+                                        <span>{`${requisition.number}/${requisition.section}`}</span>
+                                        <span>{requisition.type}</span>
+                                        <span>{`${formatNumber(requisition.value)}`}</span>
+                                        <span>{requisition.locale}</span>
+                                        <strong>{requisition.status}</strong>
+                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                    </ContainerLine>
+                                )
+                            }
+                        }
+                        {
+                            if (requisition.status === 'Empenhado') {
+                                return (
+                                    <ContainerLine empenhado key={`${requisition.number}/${requisition.section}`}>
+                                        <div />
+                                        <span>{`${requisition.number}/${requisition.section}`}</span>
+                                        <span>{requisition.type}</span>
+                                        <span>{`${formatNumber(requisition.value)}`}</span>
+                                        <span>{requisition.locale}</span>
+                                        <strong>{requisition.status}</strong>
+                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                    </ContainerLine>
+                                )
+                            }
+                        }
+                        {
+                            if (requisition.status === 'Liquidado') {
+                                return (
+                                    <ContainerLine liquidado key={`${requisition.number}/${requisition.section}`}>
+                                        <div />
+                                        <span>{`${requisition.number}/${requisition.section}`}</span>
+                                        <span>{requisition.type}</span>
+                                        <span>{`${formatNumber(requisition.value)}`}</span>
+                                        <span>{requisition.locale}</span>
+                                        <strong>{requisition.status}</strong>
+                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                    </ContainerLine>
+                                )
+                            }
+                        }
+                        {
+                            if (requisition.status === 'Pago') {
+                                return (
+                                    <ContainerLine pago key={`${requisition.number}/${requisition.section}`}>
+                                        <div />
+                                        <span>{`${requisition.number}/${requisition.section}`}</span>
+                                        <span>{requisition.type}</span>
+                                        <span>{`${formatNumber(requisition.value)}`}</span>
+                                        <span>{requisition.locale}</span>
+                                        <strong>{requisition.status}</strong>
+                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                    </ContainerLine>
+                                )
+                            }
+                        }
+                    })} */}
                 </ContainerWindow>
 
                 <AsideMenu />
