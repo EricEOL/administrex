@@ -1,4 +1,6 @@
-import { useRouter } from 'next/router';
+import React from 'react';
+import Link from 'next/link';
+import { useAuth } from '../../hooks/auth';
 import Logo from '../Logo';
 import styled from 'styled-components';
 
@@ -37,26 +39,35 @@ const ContainerMenu = styled.nav`
                 border-radius: 4px; 
             }
         }
+        .login {
+            color: yellow;
+            font-weight: 700;
+        }
     }
 `;
 
 export default function Menu() {
 
-    const route = useRouter();
+    const { userLogged, Logout } = useAuth();
+
 
     function handleLogout() {
-        localStorage.removeItem('@Sistem_mar21:token');
+        
+        Logout();
+
+        /* localStorage.removeItem('@Sistem_mar21:token');
         localStorage.removeItem('@Sistem_mar21:user');
 
-        route.push('/');
+        route.push('/'); */
     }
 
     return (
         <ContainerMenu>
             <Logo />
             <ul>
-                <li><a href="/process">Início</a></li>
-                <li><a href="">Perfil</a></li>
+                <li className="login">{userLogged}</li>
+                <li><Link href="/process">Início</Link></li>
+                <li><Link href="">Perfil</Link></li>
                 <li><button onClick={handleLogout}>Log Out</button></li>
             </ul>
         </ContainerMenu>

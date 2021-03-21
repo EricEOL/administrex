@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import api from '../config/api';
+import { useAuth } from '../hooks/auth';
 import { useRouter } from 'next/router';
 import { ContainerBackground } from '../components/ContainerBackground';
 import { ContainerContent } from '../components/ContainerContent';
@@ -85,24 +85,13 @@ const ContainerLogin = styled.div`
 
 function Login() {
 
+  const { Login, LoginError } = useAuth();
   const route = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
   async function handleLogin() {
-    try {
-      const { data } = await api.post('/user/login', { email, password });
-      const { user, token } = data;
-
-      localStorage.setItem('@Sistem_mar21:token', token);
-      localStorage.setItem('@Sistem_mar21:user', user);
-
-      route.push('/process');
-
-    } catch (error) {
-      setError(error.response.data);
-    }
+    Login({email, password});
   }
 
   return (
@@ -113,22 +102,22 @@ function Login() {
 
         <ContainerLogin>
           <h2>Log In</h2>
-          
+
           <div>
-            <img src="/user_blue.svg"/>
+            <img src="/user_blue.svg" />
             <input type="email" name="email" onChange={(event) => { setEmail(event.target.value) }} />
           </div>
 
           <div>
-            <img src="/padlock.svg"/>
+            <img src="/padlock.svg" />
             <input type="password" name="password" onChange={(event) => { setPassword(event.target.value) }} />
           </div>
 
           <button onClick={handleLogin}>
-            <img src="/arrow-right.svg" alt=""/>
+            <img src="/arrow-right.svg" alt="" />
             Continuar
           </button>
-          <p className="notice-error">{error && error}</p>
+          <p className="notice-error">{LoginError && LoginError}</p>
 
           <p className="notice-register">*Para se cadastrar é necessário entrar em contato com o administrador</p>
         </ContainerLogin>

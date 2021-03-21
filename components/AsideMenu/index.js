@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const Container = styled.aside`
@@ -12,6 +13,7 @@ const Container = styled.aside`
         padding: 10px;
         border-radius: 8px;
         transition: 0.2s;
+        cursor: pointer;
 
         &:hover {
             background: #0B8BD5;
@@ -20,10 +22,11 @@ const Container = styled.aside`
 `;
 
 export default function AsideMenu() {
+ 
     return (
         <Container>
-            <a href="/requisitions/register"><img src="/add-doc.svg" alt="Inserir nova requisição"/></a>
-            <a href="/requisitions/receive"><img src="/received-doc.svg" alt="Receber documento"/></a>
+            <Link href="/requisitions/register"><img src="/add-doc.svg" alt="Inserir nova requisição"/></Link>
+            <Link href="/requisitions/receive"><img src="/received-doc.svg" alt="Receber documento"/></Link>
         </Container>
     )
 }
