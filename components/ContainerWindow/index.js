@@ -14,6 +14,13 @@ export const ContainerWindow = styled.div`
         margin: 5px;
     }
 
+    h3 {
+        text-align: center;
+        background: #DDE1E4;
+        padding: 5px;
+        color: #0B8BD5;
+    }
+
     >input {
         width: 250px;
         height: 30px;

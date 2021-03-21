@@ -8,14 +8,78 @@ import Menu from '../../../components/Menu';
 import { ContainerContent } from '../../../components/ContainerContent';
 import { ContainerWindow } from '../../../components/ContainerWindow';
 
-export default function EditProcessEmpenho({id, numberSection}){
+const Form = styled.form`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
 
-    console.log(id);
-    console.log(numberSection);
+    div {
+        text-align: center;
+        margin-bottom: 20px;
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        input {
+            width: 300px;
+            height: 30px;
+            outline: none;
+            border: 1px solid #DDE1E4;
+            transition: 0.2s;
+            text-align: center;
+                
+            &:focus {
+                border: 2px solid #0B8BD5;
+            }
+        }
+    }
+
+    button {
+        width: 270px;
+        height: 30px;
+        border: 0;
+        border-radius: 4px;
+        background: #0B8BD5;
+        color: #fff;
+        cursor: pointer;
+        font-weight: 700;
+        outline: none;
+        transition: 0.2s;
+        margin-top: 20px;
+
+        &:hover {
+            background: #064C74;
+        }
+    }
+
+    .notice-error {
+        margin-top: 20px;
+        font-size: 12px;
+        color: red;
+        font-weight: 700;
+    }
+
+    .notice-ok {
+        margin-top: 20px;
+        font-size: 12px;
+        color: green;
+        font-weight: 700;
+    }
+`;
+
+export default function EditProcessEmpenho({ id, numberSection }) {
 
     const route = useRouter();
     const [empenho, setEmpenho] = useState();
     const [pi, setPi] = useState();
+    const [error, setError] = useState();
+    const [noticeSending, setNoticeSending] = useState();
 
     useEffect(() => {
         const verifyAuthentication = isAuthenticated();
@@ -24,30 +88,25 @@ export default function EditProcessEmpenho({id, numberSection}){
             route.push('/');
             return;
         }
-    },[]);
+    }, []);
 
     async function handleSubmit(event) {
         event.preventDefault();
 
         try {
-            const response = await api.put('/requisition/updateempenho', 
-/*             { 
-                id,
-                empenho: ,
-                pi: , 
-            },  */
-            {
-                headers: {
-                    'authorization-token': localStorage.getItem("@Sistem_mar21:token"),
-                }
-            });
+            const response = await api.put('/requisition/updateempenho',
+                {
+                    id,
+                    empenho,
+                    pi,
+                },
+                {
+                    headers: {
+                        'authorization-token': localStorage.getItem("@Sistem_mar21:token"),
+                    }
+                });
 
             setNoticeSending(response.data);
-
-            const indexRequisition = requisitions.findIndex(requisition => requisition._id === requisitionUpdated);
-            requisitions.splice(indexRequisition, 1);
-
-            setSendingImage(true);
 
         } catch (error) {
             setError(error.response.data);
@@ -60,20 +119,34 @@ export default function EditProcessEmpenho({id, numberSection}){
             <ContainerContent>
                 <ContainerWindow>
                     <h2>Inserir Empenho e Plano Interno</h2>
-                    <div>
+                    <h3>{numberSection}</h3>
+                    <Form onSubmit={handleSubmit}>
                         <div>
                             <label>Nota de Empenho</label>
-                            <input type="text" onChange={(event)=> {
-                                setEmpenho(event.target.value) 
-                            }}/>                       
+                            <input type="text" onChange={(event) => {
+                                setError('');
+                                setNoticeSending('');
+                                setEmpenho(event.target.value);
+                            }} />
                         </div>
                         <div>
                             <label>Plano Interno</label>
-                            <input type="text" onChange={(event)=> {
-                                setPi(event.target.value) 
-                            }}/>
+                            <input type="text" onChange={(event) => {
+                                setError('');
+                                setNoticeSending('');
+                                setPi(event.target.value);
+                            }} />
                         </div>
-                    </div>
+                        <button type="submit">Inserir informações</button>
+
+                        {error && (
+                            <p className="notice-error">{error}</p>
+                        )}
+                        {noticeSending && (
+                            <p className="notice-ok">{noticeSending}</p>
+                        )}
+
+                    </Form>
                 </ContainerWindow>
             </ContainerContent>
         </ContainerBackground>
@@ -83,6 +156,8 @@ export default function EditProcessEmpenho({id, numberSection}){
 export async function getServerSideProps(context) {
 
     const [idProcess, numberSectionProcess] = context.query.id.split('__');
+
+    console.log(numberSectionProcess);
 
     return {
         props: {

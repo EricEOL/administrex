@@ -1,3 +1,4 @@
+import React, {useEffect} from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { AuthProvider } from '../hooks/auth';
 import Head from 'next/head';
@@ -19,6 +20,14 @@ const theme = {
 }
 
 export default function App({ Component, pageProps }) {
+
+  useEffect(()=>{
+    window.onunload = function () {
+      localStorage.removeItem('@Sistem_mar21:token');
+      localStorage.removeItem("@Sistem_mar21:user");
+    }
+  },[])
+
   return (
     <>
       <Head>

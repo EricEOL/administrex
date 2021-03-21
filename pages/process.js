@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useAuth } from '../hooks/auth';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import api from '../config/api';
-import { isAuthenticated } from '../services/auth';
+//import { isAuthenticated } from '../services/auth';
 import formatNumber from '../utils/formatNumber';
 import { ContainerBackground } from '../components/ContainerBackground';
 import { ContainerContent } from '../components/ContainerContent';
@@ -11,18 +13,15 @@ import AsideMenu from '../components/AsideMenu';
 import { ContainerWindow } from '../components/ContainerWindow';
 
 function Process() {
-    const route = useRouter();
+    const { isAuthenticated } = useAuth();
+    //const route = useRouter();
     const [requisitions, setRequisitions] = useState();
     const [error, setError] = useState();
     const [requisitionsFiltered, setRequisitionsFiltered] = useState([]);
 
     useEffect(() => {
-        const verifyAuthentication = isAuthenticated();
 
-        if (!verifyAuthentication) {
-            route.push('/');
-            return;
-        }
+        isAuthenticated();
 
         async function getData() {
             try {
@@ -92,7 +91,7 @@ function Process() {
                                         <span>{`${formatNumber(requisition.value)}`}</span>
                                         <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
-                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                        <Link href={`/requisitions/${requisition._id}`}>Detalhar</Link>
                                     </ContainerLine>
                                 )
                             }
@@ -107,7 +106,7 @@ function Process() {
                                         <span>{`${formatNumber(requisition.value)}`}</span>
                                         <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
-                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                        <Link href={`/requisitions/${requisition._id}`}>Detalhar</Link>
                                     </ContainerLine>
                                 )
                             }
@@ -122,7 +121,7 @@ function Process() {
                                         <span>{`${formatNumber(requisition.value)}`}</span>
                                         <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
-                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                        <Link href={`/requisitions/${requisition._id}`}>Detalhar</Link>
                                     </ContainerLine>
                                 )
                             }
@@ -137,7 +136,7 @@ function Process() {
                                         <span>{`${formatNumber(requisition.value)}`}</span>
                                         <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
-                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                        <Link href={`/requisitions/${requisition._id}`}>Detalhar</Link>
                                     </ContainerLine>
                                 )
                             }
@@ -157,7 +156,7 @@ function Process() {
                                         <span>{`${formatNumber(requisition.value)}`}</span>
                                         <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
-                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                        <Link href={`/requisitions/${requisition._id}`}>Detalhar</Link>
                                     </ContainerLine>
                                 )
                             }
@@ -172,7 +171,7 @@ function Process() {
                                         <span>{`${formatNumber(requisition.value)}`}</span>
                                         <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
-                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                        <Link href={`/requisitions/${requisition._id}`}>Detalhar</Link>
                                     </ContainerLine>
                                 )
                             }
@@ -187,7 +186,7 @@ function Process() {
                                         <span>{`${formatNumber(requisition.value)}`}</span>
                                         <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
-                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                        <Link href={`/requisitions/${requisition._id}`}>Detalhar</Link>
                                     </ContainerLine>
                                 )
                             }

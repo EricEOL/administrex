@@ -19,14 +19,14 @@ export const AuthProvider = ({ children }) => {
         }
     }, [])
 
-    const Login = async ({email, password}) => {
+    const Login = async ({ email, password }) => {
         try {
             const { data } = await api.post('/user/login', { email, password });
             const { user, token } = data;
 
             localStorage.setItem('@Sistem_mar21:token', token);
             localStorage.setItem('@Sistem_mar21:user', user);
-            
+
             setUserLogged(user);
 
             route.push('/process');
@@ -46,9 +46,15 @@ export const AuthProvider = ({ children }) => {
         route.push('/');
     }, []);
 
+    const isAuthenticated = useCallback(() => {
+        if (localStorage.getItem("@Sistem_mar21:token") === null) {
+            route.push('/');
+        }
+    }, [])
+
     return (
         <AuthContext.Provider
-            value={{ userLogged, Logout, Login, LoginError: error }}
+            value={{ userLogged, Logout, Login, LoginError: error, isAuthenticated }}
         >
             {children}
         </AuthContext.Provider>

@@ -60,9 +60,11 @@ Aqui estão as tecnologias utilizadas no Back-end desse projeto.
 
 ## Features
 
+  - [x] Autenticação no Front-end e no Back-end
   - [x] Cadastramento de processos
   - [x] Mapeamento das situações
-  - [ ] Atualização da situação dos processos por parte das seções envolvidas
+  - [x] Atualização da situação dos processos por parte das seções envolvidas
+  - [ ] Inserção de novos dados em processos já criados
   - [ ] Total dos valores gastos no anualmente
 
 

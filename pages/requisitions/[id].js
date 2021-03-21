@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
 import { isAuthenticated } from '../../services/auth';
@@ -180,9 +181,9 @@ export default function Details({ id }) {
                             )}
                         </Informations>
 
-                    <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-                        <a className="ancor-button" href={`/requisitions/empenho/${item._id}__${item.number}-${item.section}`}>Inserir Empenho</a>
-                        <a className="ancor-button" href={`/requisitions/payment/${item._id}__${item.number}-${item.section}`}>Inserir Liquidação/Pagamento</a>
+                    <div key={item.number} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
+                        <Link href={`/requisitions/empenho/${item._id}__${item.number}-${item.section}`}><span className="ancor-button">Inserir Empenho</span></Link>
+                        <Link className="ancor-button" href={`/requisitions/payment/${item._id}__${item.number}-${item.section}`}><span className="ancor-button">Inserir Liquidação/Pagamento</span></Link>
                     </div>
                     </>
                     ))}
