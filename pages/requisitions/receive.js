@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useAuth } from '../../hooks/auth';
 import styled from 'styled-components';
-import { isAuthenticated } from '../../services/auth';
 import api from '../../config/api';
 import { ContainerBackground } from '../../components/ContainerBackground';
 import Menu from '../../components/Menu';
@@ -83,7 +82,7 @@ const ContainerReceive = styled.div`
 
 export default function Receive() {
 
-    const route = useRouter();
+    const {isAuthenticated} = useAuth();
     const [requisitions, setRequisitions] = useState();
     const [requisitionUpdated, setRequisitionUpdated] = useState();
     const [sendingImage, setSendingImage] = useState(false);
@@ -91,12 +90,8 @@ export default function Receive() {
     const [error, setError] = useState();
 
     useEffect(() => {
-        const verifyAuthentication = isAuthenticated();
 
-        if (!verifyAuthentication) {
-            route.push('/');
-            return;
-        }
+        isAuthenticated();
 
         async function getData() {
             try {

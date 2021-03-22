@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useAuth } from '../../hooks/auth';
 import styled from 'styled-components';
-import { isAuthenticated } from '../../services/auth';
 import api from '../../config/api';
 import { ContainerBackground } from '../../components/ContainerBackground';
 import Menu from '../../components/Menu';
@@ -81,15 +80,10 @@ const Form = styled.form`
 `;
 
 export default function RegisterRequisition() {
-    const route = useRouter();
+    const { isAuthenticated } = useAuth();
 
     useEffect(() => {
-        const verifyAuthentication = isAuthenticated();
-
-        if (!verifyAuthentication) {
-            route.push('/');
-            return;
-        }
+        isAuthenticated();
     }, [])
 
     const [noticeSending, setNoticeSending ] = useState();

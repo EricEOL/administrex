@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useAuth } from '../../hooks/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
-import { isAuthenticated } from '../../services/auth';
 import api from '../../config/api';
 import formatNumber from '../../utils/formatNumber';
 import { ContainerBackground } from '../../components/ContainerBackground';
@@ -51,18 +51,15 @@ const Status = styled.div`
 
 export default function Details({ id }) {
 
+    const {isAuthenticated} = useAuth();
     const [process, setProcess] = useState([]);
     const [error, setError] = useState();
 
     const route = useRouter();
 
     useEffect(() => {
-        const verifyAuthentication = isAuthenticated();
 
-        if (!verifyAuthentication) {
-            route.push('/');
-            return;
-        }
+        isAuthenticated();
 
         async function getData() {
             try {
@@ -86,7 +83,7 @@ export default function Details({ id }) {
             <ContainerContent>
                 <ContainerWindow>
                     <div>
-                        <h2>Detalhes do Processo - 001/Almox</h2>
+                        <h2>Detalhes do Processo</h2>
                     </div>
                     {process && process.map(item => (
                         <>

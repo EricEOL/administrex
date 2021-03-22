@@ -43,7 +43,7 @@ function Process() {
         const textFilterModified = textFilter.toUpperCase();
 
         const requisitionFiltered = requisitions.filter(requisition=> {
-            const concatData = `${requisition.number}/${requisition.section}/${requisition.status}/${requisition.type}/${requisition.locale}`;
+            const concatData = `${requisition.number}/${requisition.section}/${formatNumber(requisition.value)}/${requisition.status}/${requisition.type}/${requisition.locale}`;
             const concatDataModified = concatData.toUpperCase();
 
             if(concatDataModified.indexOf(textFilterModified) >= 0){
@@ -201,7 +201,7 @@ function Process() {
                                         <span>{`${formatNumber(requisition.value)}`}</span>
                                         <span>{requisition.locale}</span>
                                         <strong>{requisition.status}</strong>
-                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
+                                        <Link href={`/requisitions/${requisition._id}`}>Detalhar</Link>
                                     </ContainerLine>
                                 )
                             }
@@ -209,69 +209,6 @@ function Process() {
                     })}
                         </>
                     )}
-
-                    {/* {requisitions && requisitions.map(requisition => {
-                        {
-                            if (requisition.status === 'Aguardando') {
-                                return (
-                                    <ContainerLine waiting key={requisition._id} id={requisition._id}>
-                                        <div />
-                                        <span>{`${requisition.number}/${requisition.section}`}</span>
-                                        <span>{requisition.type}</span>
-                                        <span>{`${formatNumber(requisition.value)}`}</span>
-                                        <span>{requisition.locale}</span>
-                                        <strong>{requisition.status}</strong>
-                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
-                                    </ContainerLine>
-                                )
-                            }
-                        }
-                        {
-                            if (requisition.status === 'Empenhado') {
-                                return (
-                                    <ContainerLine empenhado key={`${requisition.number}/${requisition.section}`}>
-                                        <div />
-                                        <span>{`${requisition.number}/${requisition.section}`}</span>
-                                        <span>{requisition.type}</span>
-                                        <span>{`${formatNumber(requisition.value)}`}</span>
-                                        <span>{requisition.locale}</span>
-                                        <strong>{requisition.status}</strong>
-                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
-                                    </ContainerLine>
-                                )
-                            }
-                        }
-                        {
-                            if (requisition.status === 'Liquidado') {
-                                return (
-                                    <ContainerLine liquidado key={`${requisition.number}/${requisition.section}`}>
-                                        <div />
-                                        <span>{`${requisition.number}/${requisition.section}`}</span>
-                                        <span>{requisition.type}</span>
-                                        <span>{`${formatNumber(requisition.value)}`}</span>
-                                        <span>{requisition.locale}</span>
-                                        <strong>{requisition.status}</strong>
-                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
-                                    </ContainerLine>
-                                )
-                            }
-                        }
-                        {
-                            if (requisition.status === 'Pago') {
-                                return (
-                                    <ContainerLine pago key={`${requisition.number}/${requisition.section}`}>
-                                        <div />
-                                        <span>{`${requisition.number}/${requisition.section}`}</span>
-                                        <span>{requisition.type}</span>
-                                        <span>{`${formatNumber(requisition.value)}`}</span>
-                                        <span>{requisition.locale}</span>
-                                        <strong>{requisition.status}</strong>
-                                        <a href={`/requisitions/${requisition._id}`}>Detalhar</a>
-                                    </ContainerLine>
-                                )
-                            }
-                        }
-                    })} */}
                 </ContainerWindow>
 
                 <AsideMenu />

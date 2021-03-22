@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useAuth } from '../../../hooks/auth';
 import styled, { css } from 'styled-components';
-import { isAuthenticated } from '../../../services/auth';
 import api from '../../../config/api';
 import { ContainerBackground } from '../../../components/ContainerBackground';
 import Menu from '../../../components/Menu';
@@ -75,19 +74,14 @@ const Form = styled.form`
 
 export default function EditProcessEmpenho({ id, numberSection }) {
 
-    const route = useRouter();
+    const {isAuthenticated} = useAuth();
     const [empenho, setEmpenho] = useState();
     const [pi, setPi] = useState();
     const [error, setError] = useState();
     const [noticeSending, setNoticeSending] = useState();
 
     useEffect(() => {
-        const verifyAuthentication = isAuthenticated();
-
-        if (!verifyAuthentication) {
-            route.push('/');
-            return;
-        }
+        isAuthenticated();
     }, []);
 
     async function handleSubmit(event) {
@@ -156,8 +150,6 @@ export default function EditProcessEmpenho({ id, numberSection }) {
 export async function getServerSideProps(context) {
 
     const [idProcess, numberSectionProcess] = context.query.id.split('__');
-
-    console.log(numberSectionProcess);
 
     return {
         props: {
