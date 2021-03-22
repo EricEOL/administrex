@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../../hooks/auth';
+import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
 import api from '../../../config/api';
 import { ContainerBackground } from '../../../components/ContainerBackground';
@@ -84,6 +85,7 @@ const Form = styled.form`
 export default function EditProcessPayment({ id, numberSection }) {
 
     const { isAuthenticated } = useAuth();
+    const route = useRouter();
     const [nsLiquidPay, setNsLiquidPay] = useState();
     const [optionLiquidPay, setOptionLiquidPay] = useState();
     const [error, setError] = useState();
@@ -122,6 +124,7 @@ export default function EditProcessPayment({ id, numberSection }) {
             <ContainerContent>
                 <ContainerWindow>
                     <h2>Inserir Liquidação ou Pagamento</h2>
+                    <button className="back-button" onClick={() => route.push(`/requisitions/${id}`)}>Voltar</button>
                     <h3>{numberSection}</h3>
                     <Form onSubmit={handleSubmit}>
                         <div>
@@ -134,25 +137,25 @@ export default function EditProcessPayment({ id, numberSection }) {
                         </div>
                         <div className="input-radio">
                             <div>
-                                <input 
-                                    type="radio" 
-                                    id="liquid" 
-                                    value="liquid" 
-                                    name="liquidpay" 
-                                    onClick={(event)=> {
+                                <input
+                                    type="radio"
+                                    id="liquid"
+                                    value="liquid"
+                                    name="liquidpay"
+                                    onClick={(event) => {
                                         setOptionLiquidPay(event.target.value);
-                                    }}/>
+                                    }} />
                                 <label htmlFor="liquid">Liquidação</label>
                             </div>
                             <div>
-                                <input 
-                                    type="radio" 
-                                    id="payment" 
-                                    value="payment" 
-                                    name="liquidpay" 
-                                    onClick={(event)=> {
+                                <input
+                                    type="radio"
+                                    id="payment"
+                                    value="payment"
+                                    name="liquidpay"
+                                    onClick={(event) => {
                                         setOptionLiquidPay(event.target.value);
-                                    }}/>
+                                    }} />
                                 <label htmlFor="payment">Pagamento</label>
                             </div>
                         </div>

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ContainerWindow = styled.div`
+    position: relative;
     width: 70%;
     min-height: 80vh;
     margin-top: 30px;
@@ -16,7 +17,6 @@ export const ContainerWindow = styled.div`
 
     h3 {
         text-align: center;
-        background: #DDE1E4;
         padding: 5px;
         color: #0B8BD5;
     }
@@ -30,6 +30,25 @@ export const ContainerWindow = styled.div`
 
         &:focus {
             border: 3px solid #0B8BD5;
+        }
+    }
+
+    .back-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: 0;
+        margin: 20px;
+        padding: 5px;
+        border-radius: 4px;
+        background: #0B8BD5;
+        color: #fff;
+        font-weight: 700;
+        outline: none;
+        cursor: pointer;
+
+        &:hover {
+            background: #064C74;
         }
     }
 

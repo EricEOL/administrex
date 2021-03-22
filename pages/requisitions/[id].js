@@ -84,6 +84,7 @@ export default function Details({ id }) {
                 <ContainerWindow>
                     <div>
                         <h2>Detalhes do Processo</h2>
+                        <button className="back-button" onClick={() => route.push('/process')}>Voltar</button>
                     </div>
                     {process && process.map(item => (
                         <>

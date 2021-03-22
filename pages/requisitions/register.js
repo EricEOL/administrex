@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/auth';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import api from '../../config/api';
 import { ContainerBackground } from '../../components/ContainerBackground';
@@ -72,6 +73,18 @@ const Form = styled.form`
                         border: 2px solid #0B8BD5;
                     }
                 }
+
+                select {
+                    width: 300px;
+                    height: 30px;
+                    outline: none;
+                    border: 1px solid #DDE1E4;
+                    transition: 0.2s;
+                
+                    &:focus {
+                        border: 2px solid #0B8BD5;
+                    } 
+                }
             }
 
 
@@ -82,11 +95,13 @@ const Form = styled.form`
 export default function RegisterRequisition() {
     const { isAuthenticated } = useAuth();
 
+    const route = useRouter();
+
     useEffect(() => {
         isAuthenticated();
     }, [])
 
-    const [noticeSending, setNoticeSending ] = useState();
+    const [noticeSending, setNoticeSending] = useState();
     const [error, setError] = useState();
     const [number, setNumber] = useState();
     const [section, setSection] = useState();
@@ -98,12 +113,12 @@ export default function RegisterRequisition() {
     async function handleSubmit(event) {
 
         event.preventDefault();
-        
+
         setNoticeSending('');
         setError('');
 
         try {
-            const response = await api.post('/requisition/register', 
+            const response = await api.post('/requisition/register',
                 {
                     number,
                     section,
@@ -111,7 +126,7 @@ export default function RegisterRequisition() {
                     type,
                     value,
                     object,
-                } 
+                }
                 ,
                 {
                     headers: {
@@ -133,6 +148,7 @@ export default function RegisterRequisition() {
             <ContainerContent>
                 <ContainerWindow>
                     <h2>Registrar nova requisição</h2>
+                    <button className="back-button" onClick={() => route.push('/process')}>Voltar</button>
                     <Form onSubmit={handleSubmit}>
                         <div className="form-divisions">
                             <div className="form-inputs">
@@ -156,7 +172,12 @@ export default function RegisterRequisition() {
                                 </div>
                                 <div>
                                     <label>Tipo</label>
-                                    <input type="text" name="type" onChange={(event) => setType(event.target.value)} />
+                                    <select onChange={(event)=>setType(event.target.value)}>
+                                        <option value=""></option>
+                                        <option value="Carona">Carona</option>
+                                        <option value="Dispensa">Dispensa</option>
+                                        <option value="Ab Licitação">Ab Licitação</option>
+                                    </select>
                                 </div>
                                 <div>
                                     <label>Objeto</label>
@@ -165,14 +186,14 @@ export default function RegisterRequisition() {
                             </div>
                         </div>
                         <button type="submit" >Registrar</button>
-                        
+
                         {error && (
                             <p className="notice-error">{error}</p>
                         )}
                         {noticeSending && (
                             <p className="notice-ok">{noticeSending}</p>
                         )}
-                    
+
                     </Form>
                 </ContainerWindow>
             </ContainerContent>

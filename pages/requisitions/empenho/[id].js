@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../../hooks/auth';
+import {useRouter} from 'next/router';
 import styled, { css } from 'styled-components';
 import api from '../../../config/api';
 import { ContainerBackground } from '../../../components/ContainerBackground';
@@ -75,6 +76,7 @@ const Form = styled.form`
 export default function EditProcessEmpenho({ id, numberSection }) {
 
     const {isAuthenticated} = useAuth();
+    const route = useRouter();
     const [empenho, setEmpenho] = useState();
     const [pi, setPi] = useState();
     const [error, setError] = useState();
@@ -113,6 +115,7 @@ export default function EditProcessEmpenho({ id, numberSection }) {
             <ContainerContent>
                 <ContainerWindow>
                     <h2>Inserir Empenho e Plano Interno</h2>
+                    <button className="back-button" onClick={() => route.push(`/requisitions/${id}`)}>Voltar</button>
                     <h3>{numberSection}</h3>
                     <Form onSubmit={handleSubmit}>
                         <div>

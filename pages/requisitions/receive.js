@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/auth';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import api from '../../config/api';
 import { ContainerBackground } from '../../components/ContainerBackground';
@@ -83,6 +84,7 @@ const ContainerReceive = styled.div`
 export default function Receive() {
 
     const {isAuthenticated} = useAuth();
+    const route = useRouter();
     const [requisitions, setRequisitions] = useState();
     const [requisitionUpdated, setRequisitionUpdated] = useState();
     const [sendingImage, setSendingImage] = useState(false);
@@ -135,11 +137,12 @@ export default function Receive() {
             <ContainerContent>
                 <ContainerWindow>
                     <h2>Receber Processo</h2>
+                    <button className="back-button" onClick={() => route.push('/process')}>Voltar</button>
                     <ContainerReceive>
                         <img src={sendingImage ? "/doc-checked-green.svg" : "/doc-checked-gray.svg"} alt="" />
                         <form onSubmit={handleSubmit}>
                             <strong>Processo</strong>
-                            <select name="" id="" onChange={(event) => {
+                            <select onChange={(event) => {
                                 setRequisitionUpdated(event.target.value);
                                 setSendingImage(false);
                                 setNoticeSending('');
