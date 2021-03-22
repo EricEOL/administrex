@@ -58,13 +58,25 @@ Aqui estão as tecnologias utilizadas no Back-end desse projeto.
 |---|
 | ![Receive_screen_de](https://github.com/EricEOL/administrex/blob/main/public/screenshots/receive_de.jpg)  |
 
+### 6 - Inserir Empenho e Plano Interno
+
+| Desktop  |
+|---|
+| ![emp_screen_de](https://github.com/EricEOL/administrex/blob/main/public/screenshots/emp_de.jpg)  |
+
+### 7 - Inserir Liquidação ou Pagamento
+
+| Desktop  |
+|---|
+| ![liquidpay_screen_de](https://github.com/EricEOL/administrex/blob/main/public/screenshots/liquidpay_de.jpg)  |
+
 ## Features
 
   - [x] Autenticação no Front-end e no Back-end
   - [x] Cadastramento de processos
   - [x] Mapeamento das situações
   - [x] Atualização da situação dos processos por parte das seções envolvidas
-  - [ ] Inserção de novos dados em processos já criados
+  - [x] Inserção de novos dados em processos já criados
   - [ ] Total dos valores gastos no anualmente
 
 
