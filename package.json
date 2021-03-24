@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest --watch",
+    "coverage": "jest --coverage"
   },
   "dependencies": {
     "axios": "^0.21.1",

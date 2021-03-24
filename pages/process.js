@@ -14,7 +14,6 @@ import { ContainerWindow } from '../components/ContainerWindow';
 
 function Process() {
     const { isAuthenticated } = useAuth();
-    //const route = useRouter();
     const [requisitions, setRequisitions] = useState();
     const [error, setError] = useState();
     const [requisitionsFiltered, setRequisitionsFiltered] = useState([]);

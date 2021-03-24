@@ -77,7 +77,7 @@ Aqui estão as tecnologias utilizadas no Back-end desse projeto.
   - [x] Mapeamento das situações
   - [x] Atualização da situação dos processos por parte das seções envolvidas
   - [x] Inserção de novos dados em processos já criados
-  - [ ] Total dos valores gastos no anualmente
+  - [ ] Total dos valores gastos anualmente
 
 
 ## Links

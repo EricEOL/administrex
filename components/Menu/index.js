@@ -54,11 +54,6 @@ export default function Menu() {
     function handleLogout() {
         
         Logout();
-
-        /* localStorage.removeItem('@Sistem_mar21:token');
-        localStorage.removeItem('@Sistem_mar21:user');
-
-        route.push('/'); */
     }
 
     return (
@@ -67,7 +62,7 @@ export default function Menu() {
             <ul>
                 <li className="login">{userLogged}</li>
                 <li><Link href="/process">Início</Link></li>
-                <li><Link href="">Perfil</Link></li>
+                <li><Link href="/finance/totals">Finanças</Link></li>
                 <li><button onClick={handleLogout}>Log Out</button></li>
             </ul>
         </ContainerMenu>

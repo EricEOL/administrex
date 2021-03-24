@@ -21,12 +21,12 @@ const theme = {
 
 export default function App({ Component, pageProps }) {
 
-  useEffect(()=>{
+/*   useEffect(()=>{
     window.onunload = function () {
       localStorage.removeItem('@Sistem_mar21:token');
       localStorage.removeItem("@Sistem_mar21:user");
     }
-  },[])
+  },[]) */
 
   return (
     <>

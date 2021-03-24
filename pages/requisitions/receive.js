@@ -10,6 +10,7 @@ import { ContainerWindow } from '../../components/ContainerWindow';
 
 const ContainerReceive = styled.div`
     width: 100%;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,7 +23,6 @@ const ContainerReceive = styled.div`
     }
 
     > form {
-        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -65,6 +65,7 @@ const ContainerReceive = styled.div`
 
     .notice-error {
         position: absolute;
+        bottom: 0;
         font-size: 12px;
         color: red;
         font-weight: 700;
@@ -77,7 +78,6 @@ const ContainerReceive = styled.div`
         color: green;
         font-weight: 700;
     }
-
     }
 `;
 
